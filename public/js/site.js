@@ -1,5 +1,34 @@
+showPass = function() {
+    if (option.value == "chat") {
+        pass.classList.remove("hide");
+    } else {
+        pass.classList.add('hide');
+    }
+}
+
+whyHere = async function() {
+    if (option.value == "specialPage") {
+        specialPage();
+    } else if (option.value == "chat") {
+        passPass();
+    } else if (option.value == 'null') {
+        alert("Please tell me why you are here")
+    } else {
+        // Stranger danger
+    }
+}
+
+specialPage = async function() {
+    if (validatePage('/special/' + uname.value.toLowerCase())) {
+        url = "/html/special/" + uname.value.toLowerCase() + ".html";
+        window.location.href = url;
+    } else {
+        alert("Is this really your name? (Try first name only)");
+    }
+}
+
 validatePage = async function(path) {
-    let resp = await fetch(path.toLowerCase());
+    let resp = await fetch(path);
     if (resp.ok) {
         return true
     }
@@ -61,13 +90,13 @@ manageChats = async function() {
                 let imgPath = '/images/profile/';
                 let exts = ['.png', '.jpg', '.jpeg'];
                 for (ext of exts) {
-                    if (await validatePage(imgPath + localStorage.uname + ext)) {
-                        imgPath += localStorage.uname + ext;
+                    if (await validatePage(imgPath + message['sender'] + ext)) {
+                        imgPath += message['sender'] + ext;
                         break;
                     }
                 }
                 if ('/images/profile/' == imgPath) {
-                    imgPath += localStorage.uname.slice(0, 1).toLowerCase() + '.png';
+                    imgPath += message['sender'].slice(0, 1).toLowerCase() + '.png';
                 }
                 newChat.childNodes[1].src = imgPath;
                 newChat.childNodes[3].innerText = message['sender'] + ': ';
@@ -109,4 +138,11 @@ autoFill = async function() {
         imgPath += localStorage.uname.slice(0, 1).toLowerCase() + '.png';
     }
     usrImage.src = imgPath;
+}
+
+fileSize = function(fileInput) {
+    if (fileInput.files[0].size > 500000) {
+        alert("This file is too big! Please keep it smaller than about half a MB");
+        fileInput.value = "";
+    }
 }
