@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="/css/website.css">
+    <script type="text/javascript" src="/js/site.js"></script>
+    <script>
+        const serverSource = new EventSource('/update');
+        let chats = {};
+        serverSource.onmessage = function(event) {
+            let newIds = event.data.split('\n');
+            for (id of newIds) {
+                if (!(id in chats)) {
+                    chats[id] = false;
+                }
+            }
+            manageChats()
+        }
+    </script>
+</head>
+
+<body onload="loadPage()">
+    <h1>
+        This is the PainTrain Chat!
+    </h1>
+    <a href="/html/chat/account.html">Account settings</a>
+    <div class="container hide template" id="template">
+        <img src="/images/profile/" alt="Pic" class='' style="width:100%;">
+        <span id="name"></span><span id="message"></span><br>
+        <span class="time-right"></span>
+    </div>
+    <div>
+        <input type="text" id="userMessage" placeholder="Type message here"><button type="button" id="sendMessage" onclick="sendChat()">Send</button>
+    </div>
+    <div id="chat"></div>
+</body>

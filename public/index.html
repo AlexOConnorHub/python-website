@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Random Site</title>
+    <link rel="stylesheet" type="text/css" href="css/website.css">
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+    <script type="text/javascript" src="js/site.js"></script>
+</head>
+
+<body onload="showPass()">
+    <h1 class="center">Thanks for stopping by
+        <br>Please tell me why you are hear
+        <br>and I can help you be on your merry way!</h1>
+    <select id="option" class="center" onchange="showPass()">
+        <option value='null' disabled selected>Why are you here?</option>
+        <option value="specialPage">I was sent a link here</option>
+        <option value="chat">I want to chat with someone</option>
+    </select> Your name
+    <input type="text" id="uname" class="center">
+    <span id="labelForPass" class="center"></span></span>
+    <input type="password" class="hide center" id="pass" placeholder="PassPhrase">
+    <button type="button " id="theButton" class="center" onclick="whyHere()">Submit</button> <br>
+    <a class="center" href="/html/chat/signup.html">Sign up for a chat account</a>
+</body>
+
+</html>
