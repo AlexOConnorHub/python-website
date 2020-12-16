@@ -92,10 +92,6 @@ loadPage = async function() {
     manageChats()
 }
 
-changePass = async function() {
-
-}
-
 autoFill = async function() {
     cookie.value = localStorage.validSession;
     uname.value = localStorage.uname;
